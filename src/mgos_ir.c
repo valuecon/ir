@@ -10,8 +10,8 @@
 
 static IRAM void irrecv_nec_handler(int pin, void *arg)
 { 
-  mgos_wdt_disable(void);
-  mgos_gpio_disable_int(int 5);
+  void mgos_wdt_disable(void);
+  bool mgos_gpio_disable_int(int 5);
   
   struct mgos_irrecv_nec_s *obj = (struct mgos_irrecv_nec_s *)arg;
   // get microseconds
