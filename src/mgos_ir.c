@@ -10,8 +10,7 @@
 
 static IRAM void irrecv_nec_handler(int pin, void *arg)
 { 
-  void mgos_wdt_disable(void);
-  void mgos_ints_disable(void);
+  
   struct mgos_irrecv_nec_s *obj = (struct mgos_irrecv_nec_s *)arg;
   // get microseconds
   uint32_t t = 1000000 * mgos_uptime();
@@ -55,6 +54,8 @@ static IRAM void irrecv_nec_handler(int pin, void *arg)
       // report code
       // NO LOG or printf in ISR service routine, or in the handler
       // LOG(LL_DEBUG, ("IRRECV @ %d: %08X", pin, obj->code.dword));
+      void mgos_wdt_disable(void);
+      void mgos_ints_disable(void);
       if (obj->handler) {
         obj->handler(obj->code.dword, obj->user_data);
       }
